@@ -20,6 +20,16 @@ export const userRepository = {
     return users.find((u) => u.username === username);
   },
 
+  findById(id: number): User | undefined {
+    return users.find((u) => u.id === id);
+  },
+
+  updateEmail(id: number, email: string): User | undefined {
+    const user = users.find((u) => u.id === id);
+    if (user) user.email = email;
+    return user;
+  },
+
   create(data: Omit<User, "id">): User {
     const user: User = { id: users.length + 1, ...data };
     users.push(user);
